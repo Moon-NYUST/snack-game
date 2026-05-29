@@ -1,0 +1,136 @@
+
+:root {
+  --color-page-bg: #2c3e50;
+  --color-page-bg-gradient-start: #1a1a2e;
+  --color-page-bg-gradient-end: #000000;
+  --color-page-text: #ecf0f1;
+  --color-panel-bg: rgba(44, 62, 80, 0.8);
+  --color-panel-border: #34495e;
+  --color-title-start: #ffeb3b;
+  --color-title-end: #f44336;
+  --color-button-bg: #2ecc71;
+  --color-button-text: #1a1a2e;
+  --color-button-border: #2ecc71;
+  --color-button-hover-bg: #27ae60;
+  --color-button-hover-text: #ffffff;
+  --color-button-active-bg: #1a7d41;
+}
+
+body {
+  /* Retro arcade specific font */
+  font-family: 'Press Start 2P', cursive;
+}
+
+.start-screen {
+  background: linear-gradient(135deg, var(--color-page-bg-gradient-start), var(--color-page-bg-gradient-end));
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dynamic Background for Retro Arcade */
+.start-screen::before, .start-screen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.start-screen::before {
+  background: repeating-linear-gradient(
+    0deg, 
+    rgba(0, 255, 0, 0.05) 0px, 
+    rgba(0, 255, 0, 0.05) 1px, 
+    transparent 1px, 
+    transparent 30px
+  ), repeating-linear-gradient(
+    90deg, 
+    rgba(0, 255, 0, 0.05) 0px, 
+    rgba(0, 255, 0, 0.05) 1px, 
+    transparent 1px, 
+    transparent 30px
+  );
+  animation: scanline-flow 15s linear infinite;
+}
+
+.start-screen::after {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 0, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0.3;
+  animation: radial-pulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes scanline-flow {
+  from { background-position: 0% 0%; }
+  to { background-position: 100% 100%; }
+}
+
+@keyframes radial-pulse {
+  0% { transform: scale(1); opacity: 0.3; }
+  100% { transform: scale(1.2); opacity: 0.5; }
+}
+
+.title {
+  font-family: 'Press Start 2P', cursive;
+  color: var(--color-title-start);
+  text-shadow: 
+    -2px -2px 0px var(--color-title-end),
+    2px -2px 0px var(--color-title-end),
+    -2px 2px 0px var(--color-title-end),
+    2px 2px 0px var(--color-title-end),
+    0 0 15px rgba(255, 255, 0, 0.7),
+    0 0 30px rgba(255, 165, 0, 0.5);
+  animation: neon-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon-glow {
+  from { text-shadow: 
+    -2px -2px 0px var(--color-title-end),
+    2px -2px 0px var(--color-title-end),
+    -2px 2px 0px var(--color-title-end),
+    2px 2px 0px var(--color-title-end),
+    0 0 10px rgba(255, 255, 0, 0.5),
+    0 0 20px rgba(255, 165, 0, 0.3);
+  }
+  to { text-shadow: 
+    -2px -2px 0px var(--color-title-end),
+    2px -2px 0px var(--color-title-end),
+    -2px 2px 0px var(--color-title-end),
+    2px 2px 0px var(--color-title-end),
+    0 0 20px rgba(255, 255, 0, 0.9),
+    0 0 40px rgba(255, 165, 0, 0.7);
+  }
+}
+
+.subtitle {
+  color: var(--color-page-text);
+}
+
+.menu-btn {
+  border: 2px solid var(--color-button-border);
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 5px 0px var(--color-button-border);
+}
+
+.menu-btn:not(:disabled):hover {
+  background: var(--color-button-hover-bg);
+  color: var(--color-button-hover-text);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 0px var(--color-button-border);
+}
+
+.menu-btn:not(:disabled):active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 2px 0px var(--color-button-active-bg);
+  background: var(--color-button-active-bg);
+}
